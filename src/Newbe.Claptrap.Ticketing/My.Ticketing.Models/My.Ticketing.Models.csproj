@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Trains\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newbe.Claptrap.Abstractions" Version="0.9.10-g7b4f3cd013" />
+  </ItemGroup>
+
+</Project>
