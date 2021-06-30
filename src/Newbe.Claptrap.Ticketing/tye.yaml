@@ -15,15 +15,14 @@ extensions:
 services:
   - name: ticketing-web
     project: Newbe.Claptrap.Ticketing.Web/Newbe.Claptrap.Ticketing.Web.csproj
+    env:
+    - name: ticketing-web
+      value: http://localhost:5000
+    - name: zipkin
+      value: http://localhost:9411
+    bindings:
+    - port: 5000
   - name: ticketing-backendserver
     project: Newbe.Claptrap.Ticketing.BackendServer/Newbe.Claptrap.Ticketing.BackendServer.csproj
-  - name: zipkin
-    external: true
     bindings:
-      - name: http
-        port: 9411
-  - name: seq
-    external: true
-    bindings:
-      - name: http
-        port: 5341
+    - port: 5001

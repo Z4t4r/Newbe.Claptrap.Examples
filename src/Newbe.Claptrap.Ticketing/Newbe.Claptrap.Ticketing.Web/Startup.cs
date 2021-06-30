@@ -40,6 +40,7 @@ namespace Newbe.Claptrap.Ticketing.Web
                     .AddZipkinExporter(options =>
                     {
                         var zipkinBaseUri = Configuration.GetServiceUri("zipkin", "http");
+                        zipkinBaseUri = zipkinBaseUri ?? new Uri("http://zipkin:9411/api/v2/spans");
                         options.Endpoint = new Uri(zipkinBaseUri!, "/api/v2/spans");
                     })
             );
@@ -63,6 +64,8 @@ namespace Newbe.Claptrap.Ticketing.Web
             services.AddHttpClient("train", (s, h) =>
             {
                 var baseUrl = Configuration.GetServiceUri("ticketing-web");
+
+                baseUrl = baseUrl ?? new Uri("http://localhost:80");
                 h.BaseAddress = baseUrl;
             });
             services.Configure<SiteOptions>(Configuration.GetSection("Ticketing"));
