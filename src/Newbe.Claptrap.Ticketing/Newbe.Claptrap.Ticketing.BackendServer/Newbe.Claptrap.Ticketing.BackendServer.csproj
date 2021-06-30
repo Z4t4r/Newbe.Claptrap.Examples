@@ -12,9 +12,9 @@
         <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.0.0-rc2" />
         <PackageReference Include="OpenTelemetry.Instrumentation.GrpcNetClient" Version="1.0.0-rc2" />
         <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.0.0-rc2" />
-        <PackageReference Include="Newbe.Claptrap.Dapr" Version="$(ClaptrapPackageVersion)" />
-        <PackageReference Include="Newbe.Claptrap.Dapr.Hosting" Version="$(ClaptrapPackageVersion)" />
-        <PackageReference Include="Newbe.Claptrap.StorageProvider.SQLite" Version="$(ClaptrapPackageVersion)" />
+        <PackageReference Include="Newbe.Claptrap.Dapr" Version="0.10.2" />
+        <PackageReference Include="Newbe.Claptrap.Dapr.Hosting" Version="0.10.2" />
+        <PackageReference Include="Newbe.Claptrap.StorageProvider.SQLite" Version="0.10.2" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.0.7" />
     </ItemGroup>
 

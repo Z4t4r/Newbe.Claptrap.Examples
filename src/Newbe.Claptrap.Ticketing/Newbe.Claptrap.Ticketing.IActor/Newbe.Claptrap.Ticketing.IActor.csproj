@@ -5,8 +5,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Newbe.Claptrap.Attributes" Version="$(ClaptrapPackageVersion)" />
-        <PackageReference Include="Newbe.Claptrap.Dapr.Core" Version="$(ClaptrapPackageVersion)" />
+        <PackageReference Include="Newbe.Claptrap.Attributes" Version="0.10.2" />
+        <PackageReference Include="Newbe.Claptrap.Dapr.Core" Version="0.10.2" />
     </ItemGroup>
 
     <ItemGroup>

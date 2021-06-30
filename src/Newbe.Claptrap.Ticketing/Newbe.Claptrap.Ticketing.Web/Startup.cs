@@ -9,10 +9,12 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Newbe.Claptrap.Ticketing.Repository.Module;
 using Newbe.Claptrap.Ticketing.Web.Models;
 using OpenTelemetry.Trace;
+using Serilog;
 
 namespace Newbe.Claptrap.Ticketing.Web
 {
@@ -55,7 +57,7 @@ namespace Newbe.Claptrap.Ticketing.Web
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "Newbe.Claptrap.Ticketing.Web", Version = "v1"});
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Newbe.Claptrap.Ticketing.Web", Version = "v1" });
             });
 
             services.AddHttpClient("train", (s, h) =>
@@ -64,6 +66,8 @@ namespace Newbe.Claptrap.Ticketing.Web
                 h.BaseAddress = baseUrl;
             });
             services.Configure<SiteOptions>(Configuration.GetSection("Ticketing"));
+            Log.Logger.Error($"ticketing-web = {Configuration.GetServiceUri("ticketing-web")?.AbsoluteUri}");
+            Log.Logger.Error($"zipkinBaseUri = {Configuration.GetServiceUri("zipkin", "http")?.AbsoluteUri}");
         }
 
         // ConfigureContainer is where you can register things directly
@@ -76,11 +80,10 @@ namespace Newbe.Claptrap.Ticketing.Web
             builder.RegisterModule(new RepositoryModule());
         }
 
-
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            var supportedCultures = new[] {"zh", "en-US"};
+            var supportedCultures = new[] { "zh", "en-US" };
             var localizationOptions = new RequestLocalizationOptions()
                 .SetDefaultCulture(supportedCultures.Last())
                 .AddSupportedCultures(supportedCultures)
@@ -107,7 +110,6 @@ namespace Newbe.Claptrap.Ticketing.Web
             });
 
             app.UseStaticFiles();
-
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }

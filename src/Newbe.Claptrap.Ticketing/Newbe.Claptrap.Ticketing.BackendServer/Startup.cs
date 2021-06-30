@@ -28,10 +28,10 @@ namespace Newbe.Claptrap.Ticketing.BackendServer
                 .GetRequiredService<ILoggerFactory>();
 
             var bootstrapperBuilder = new AutofacClaptrapBootstrapperBuilder(loggerFactory);
-            _claptrapBootstrapper = (AutofacClaptrapBootstrapper) bootstrapperBuilder
+            _claptrapBootstrapper = (AutofacClaptrapBootstrapper)bootstrapperBuilder
                 .ScanClaptrapModule()
                 .AddConfiguration(configuration)
-                .ScanClaptrapDesigns(new[] {typeof(SeatActor).Assembly})
+                .ScanClaptrapDesigns(new[] { typeof(SeatActor).Assembly })
                 .Build();
             _claptrapDesignStore = _claptrapBootstrapper.DumpDesignStore();
         }
@@ -51,7 +51,7 @@ namespace Newbe.Claptrap.Ticketing.BackendServer
                     .AddZipkinExporter(options =>
                     {
                         var zipkinBaseUri = Configuration.GetServiceUri("zipkin", "http");
-                        options.Endpoint = new Uri(zipkinBaseUri!, "/api/v2/spans");
+                        options.Endpoint = new Uri("http://localhost:9411/api/v2/spans");//new Uri(zipkinBaseUri!, "/api/v2/spans");
                     })
             );
             services.AddClaptrapServerOptions();
@@ -59,7 +59,7 @@ namespace Newbe.Claptrap.Ticketing.BackendServer
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "Newbe.Claptrap.Ticketing.BackendServer", Version = "v1"});
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Newbe.Claptrap.Ticketing.BackendServer", Version = "v1" });
             });
         }
 
@@ -76,7 +76,6 @@ namespace Newbe.Claptrap.Ticketing.BackendServer
             _claptrapBootstrapper.Boot(builder);
         }
 
-
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -86,7 +85,6 @@ namespace Newbe.Claptrap.Ticketing.BackendServer
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Newbe.Claptrap.Ticketing.BackendServer v1"));
             }
-
 
             app.UseRouting();
 

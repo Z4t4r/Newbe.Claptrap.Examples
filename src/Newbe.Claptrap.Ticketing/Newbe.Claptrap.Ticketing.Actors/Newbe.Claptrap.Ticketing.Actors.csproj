@@ -5,9 +5,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Newbe.Claptrap" Version="$(ClaptrapPackageVersion)" />
-        <PackageReference Include="Newbe.Claptrap.DataSerializer.TextJson" Version="$(ClaptrapPackageVersion)" />
-        <PackageReference Include="Newbe.Claptrap.Dapr" Version="$(ClaptrapPackageVersion)" />
+        <PackageReference Include="Newbe.Claptrap" Version="0.10.2" />
+        <PackageReference Include="Newbe.Claptrap.DataSerializer.TextJson" Version="0.10.2" />
+        <PackageReference Include="Newbe.Claptrap.Dapr" Version="0.10.2" />
     </ItemGroup>
 
     <ItemGroup>

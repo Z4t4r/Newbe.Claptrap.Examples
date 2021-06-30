@@ -5,12 +5,11 @@
 #    https://aka.ms/AA7q20u
 #
 name: ticketing
+registry: ccr.ccs.tencentyun.com/v4ni11a
 extensions:
   - name: dapr
     components-path: "./dapr_components/"
     config: claptrap_config
-    exclude-placement-container: true
-    placement-port: 6050
   - name: zipkin
   - name: seq
 services:
